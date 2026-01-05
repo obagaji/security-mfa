@@ -8,10 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.authority.FactorGrantedAuthority;
 
 @SpringBootApplication
-@EnableWebSecurity
-@EnableMethodSecurity
-@EnableMultiFactorAuthentication(authorities =
-		{FactorGrantedAuthority.PASSWORD_AUTHORITY,FactorGrantedAuthority.OTT_AUTHORITY})
+
+
 public class SecurityMfaApplication {
 
 	public static void main(String[] args) {

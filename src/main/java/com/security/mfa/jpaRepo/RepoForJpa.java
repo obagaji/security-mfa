@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface RepoForJpa extends JpaRepository<UserMfa,Long> {
-    Optional<UserMfa> findUserByUserName(String userName);
+    Optional<UserMfa>  findByUserName(String username);
 }

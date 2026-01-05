@@ -14,21 +14,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-
 public class MyuserDetail implements UserDetails {
-    private  UserMfa userMfa;
+    private final UserMfa userMfa;
     public MyuserDetail(UserMfa userMfa)
     {
         this.userMfa=userMfa;
     }
-    public MyuserDetail()
-    {}
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(userMfa.getRoles().split(" ")).stream()
+        return Arrays.stream(userMfa.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
-
     @Override
     public @Nullable String getPassword() {
         return userMfa.getUserPassword();
@@ -38,4 +35,36 @@ public class MyuserDetail implements UserDetails {
     public String getUsername() {
         return userMfa.getUserName();
     }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
+    }
+
+/*
+    @Override
+    public @Nullable String getPassword() {
+        return userMfa.getUserPassword();
+    }
+
+    @Override
+    public String getUsername() {
+        return userMfa.getUserName();
+    }
+    */
 }
